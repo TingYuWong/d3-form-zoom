@@ -25,7 +25,7 @@ export default {
     return {
       tabsArr: ['Timeline', 'Table'],
       tabNameObj: {
-        'Timeline': 'Timeline',
+        'Timeline': 'TimeLine',
         'Table': '管路歷程'
       }
     }
