@@ -1,18 +1,33 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Tabs :chosenTab.sync="chosenTab"/>
+    <component :is="chosenTab" />
+    <AddTube />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Tabs from '@/components/Tabs.vue'
+import Table from '@/components/Table.vue'
+import Timeline from '@/components/Timeline.vue'
+import AddTube from '@/components/AddTube.vue'
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      chosenTab: 'Table'
+    }
+  },
   components: {
-    HelloWorld
+    Tabs, Table, AddTube, Timeline
   }
 }
 </script>
+
+<style scoped>
+  .home {
+    padding: 9px 20px;
+  }
+</style>
