@@ -17,7 +17,7 @@ export default {
   name: 'Home',
   data() {
     return {
-      chosenTab: 'Table'
+      chosenTab: 'Timeline'
     }
   },
   components: {

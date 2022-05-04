@@ -59,7 +59,7 @@ export default {
   color: #444444;
   background-color: #FFFFFF;
   border-radius: 10px 10px 0px 0px;
-  width: 120px;
+  width: 150px;
   height: 46px;
   display: flex;
   align-items: center;
