@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <Axis :xScale="xScale" :svgWidth="svgWidth" />
-    <Form :xScale="xScale" :svgWidth="svgWidth" />
+  <div class="timeline-wrap">
+    <button @click="changeTitleArr(3)">3</button>
+    <button @click="changeTitleArr(6)">6</button>
+    <Axis :xScale="xScale" :svgWidth="svgWidth" :zoomX="zoomX" />
+    <Form :xScale="xScale" :svgWidth="svgWidth" :titleArr="titleArr" :zoomX.sync="zoomX" ref="Form" />
   </div>
 </template>
 
@@ -16,7 +18,12 @@ export default {
     return {
       svgWidth: 1000,
       defaultDays: 40,
+      titleArr: ['Foley Catheter 2Way', 'Foley Catheter 2Way', 'Foley Catheter 2Way'],
+      zoomX: null,
     }
+  },
+  beforeMount() {
+    this.zoomX = this.xScale
   },
   components: {
     Axis,
@@ -33,11 +40,26 @@ export default {
                .domain([st, st + (30 * 24 * 60 * 60 * 1000)])
                .range([0, this.svgWidth - 240])
     },
+  },
+  methods: {
+    changeTitleArr(num) {
+      if(num == 3) {
+        this.titleArr = ['', '', '']
+      } else {
+        this.titleArr = ['Foley Catheter 2Way', 'Foley Catheter 2Way', 'Foley Catheter 2Way',
+         'Foley Catheter 2Way', 'Foley Catheter 2Way', 'Foley Catheter 2Way']
+      }
 
+      this.$refs.Form.drawForm()
+    }
   },
 }
 </script>
 
 <style scoped>
-
+.timeline-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 </style>

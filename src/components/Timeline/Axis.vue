@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="axis-wrap">
     <svg class="axisSvg" height="45" :width="svgWidth">
       <rect class="axisRect" width="100%" height="100%"/>
       <text x="10" y="30">Tube</text>
@@ -15,8 +15,8 @@
 import * as d3 from "d3"
 
 export default {
-  name: 'TestTimeline',
-  props: ['xScale', 'svgWidth'],
+  name: 'Axis',
+  props: ['xScale', 'svgWidth', 'zoomX'],
   data() {
     return {
       axisHeight: 45,
@@ -40,6 +40,12 @@ export default {
     this.drawMonthAxis()
     this.drawDayAxis()
   },
+  watch: {
+    zoomX() {
+      this.drawMonthAxis()
+      this.drawDayAxis()
+    },
+  },
   methods: {
     drawDayAxis() {
       d3.selectAll(".day-axis")
@@ -47,7 +53,7 @@ export default {
         .style("font", "12px Arial")
         .call(
           d3
-            .axisTop(this.xScale)
+            .axisTop(this.zoomX)
             .tickSize(3)
             .tickPadding(8)
             .tickFormat(d3.timeFormat("%d"))
@@ -55,7 +61,6 @@ export default {
         )
         .selectAll("text")
         .attr("color", (d) => {
-          console.log(d)
           return new Date(d).getDate() % 5 == 0 ? "#737895" : "#B4B9D8";
         })
         .select("path")
@@ -67,7 +72,7 @@ export default {
         .style("font", "12px Arial")
         .call(
           d3
-            .axisTop(this.xScale)
+            .axisTop(this.zoomX)
             .tickSize(0)
             .tickPadding(8)
             .tickFormat((tim, index) => {
@@ -86,6 +91,11 @@ export default {
 </script>
 
 <style scoped>
+.axis-wrap {
+  margin-top: 35px;
+  margin-bottom: 20px;
+}
+
 text {
   font: normal normal normal 14px/16px Arial;
   fill: #444444;
