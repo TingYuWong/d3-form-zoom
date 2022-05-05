@@ -2,6 +2,7 @@
   <div class="timeline-wrap">
     <button @click="changeTitleArr(3)">3</button>
     <button @click="changeTitleArr(6)">6</button>
+    <button @click="reset">reset</button>
     <Axis :xScale="xScale" :svgWidth="svgWidth" :zoomX="zoomX" />
     <Form :xScale="xScale" :svgWidth="svgWidth" :titleArr="titleArr" :zoomX.sync="zoomX" ref="Form" />
   </div>
@@ -51,6 +52,9 @@ export default {
       }
 
       this.$refs.Form.drawForm()
+    },
+    reset() {
+      this.$refs.Form.reset()
     }
   },
 }

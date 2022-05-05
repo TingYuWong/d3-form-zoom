@@ -137,6 +137,12 @@ export default {
         .attr('stroke-width', "6")
 
     },
+    reset() {
+      d3.select(".form-svg")
+        .transition()
+        .duration(750)
+        .call(this.zoom.transform, d3.zoomIdentity.scale(1));
+    },
   },
 }
 </script>
